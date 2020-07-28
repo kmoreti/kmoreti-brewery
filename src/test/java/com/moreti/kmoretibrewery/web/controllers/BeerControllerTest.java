@@ -1,8 +1,7 @@
 package com.moreti.kmoretibrewery.web.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moreti.kmoretibrewery.service.BeerService;
+import com.moreti.kmoretibrewery.services.BeerService;
 import com.moreti.kmoretibrewery.web.model.BeerDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,9 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -61,7 +58,7 @@ class BeerControllerTest {
 
     @Test
     void getBeer() throws Exception {
-        given(beerService.getById(any(UUID.class))).willReturn(validBeer);
+        given(beerService.getBeerById(any(UUID.class))).willReturn(validBeer);
 
         mockMvc.perform(get(API_V1_BEER_URL + "/" + validBeer.getId().toString()).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

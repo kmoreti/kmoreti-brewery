@@ -1,4 +1,4 @@
-package com.moreti.kmoretibrewery.service;
+package com.moreti.kmoretibrewery.services;
 
 import com.moreti.kmoretibrewery.web.model.CustomerDto;
 import lombok.extern.slf4j.Slf4j;

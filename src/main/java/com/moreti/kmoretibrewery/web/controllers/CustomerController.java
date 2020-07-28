@@ -1,16 +1,13 @@
 package com.moreti.kmoretibrewery.web.controllers;
 
-import com.moreti.kmoretibrewery.service.CustomerService;
+import com.moreti.kmoretibrewery.services.CustomerService;
 import com.moreti.kmoretibrewery.web.model.CustomerDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -24,12 +21,12 @@ public class CustomerController {
     }
 
     @GetMapping("/{customerId}")
-    public ResponseEntity<CustomerDto> getCustomerById(@PathVariable UUID customerId) {
+    public ResponseEntity<CustomerDto> getCustomer(@PathVariable("customerId") UUID customerId) {
         return new ResponseEntity<>(customerService.getCustomerById(customerId), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity saveCustomer(@Valid @RequestBody CustomerDto customerDto) {
+    public ResponseEntity handlePost(@Valid @RequestBody CustomerDto customerDto) {
         CustomerDto savedCustomer = customerService.saveNewCustomer(customerDto);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/api/v1/customer/" + savedCustomer.getId().toString());
@@ -37,14 +34,14 @@ public class CustomerController {
     }
 
     @PutMapping("/{customerId}")
-    public ResponseEntity updateCustomer(@PathVariable UUID customerId, @Valid @RequestBody CustomerDto customerDto) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void handlePut(@PathVariable("customerId") UUID customerId, @Valid @RequestBody CustomerDto customerDto) {
         customerService.updateCustomer(customerId, customerDto);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{customerId}")
-    public ResponseEntity deleteCustomer(@PathVariable UUID customerId) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void handleDelete(@PathVariable("customerId") UUID customerId) {
         customerService.deleteCustomerById(customerId);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

@@ -1,4 +1,4 @@
-package com.moreti.kmoretibrewery.service.v2;
+package com.moreti.kmoretibrewery.services.v2;
 
 import com.moreti.kmoretibrewery.web.model.v2.BeerDtoV2;
 import org.springframework.stereotype.Service;

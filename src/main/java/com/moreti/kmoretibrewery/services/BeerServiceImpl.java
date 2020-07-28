@@ -1,4 +1,4 @@
-package com.moreti.kmoretibrewery.service;
+package com.moreti.kmoretibrewery.services;
 
 import com.moreti.kmoretibrewery.web.model.BeerDto;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,7 @@ import java.util.UUID;
 @Service
 public class BeerServiceImpl implements BeerService {
     @Override
-    public BeerDto getById(UUID beerId) {
+    public BeerDto getBeerById(UUID beerId) {
         return BeerDto.builder()
                 .id(UUID.randomUUID())
                 .beerName("Galaxy Cat")

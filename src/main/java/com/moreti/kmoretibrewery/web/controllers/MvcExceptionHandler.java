@@ -3,6 +3,7 @@ package com.moreti.kmoretibrewery.web.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class MvcExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<List> handleConstraintViolationException(ConstraintViolationException e) {
+    public ResponseEntity<List<String>> handleConstraintViolationException(ConstraintViolationException e) {
         List<String> errors = new ArrayList<>(e.getConstraintViolations().size());
         e.getConstraintViolations().forEach(constraintViolation -> {
             errors.add(constraintViolation.getPropertyPath() + " : " + constraintViolation.getMessage());
@@ -23,7 +24,7 @@ public class MvcExceptionHandler {
     }
 
     @ExceptionHandler(BindException.class)
-    public ResponseEntity<List> handleBindException(BindException e)  {
+    public ResponseEntity<List<ObjectError>> handleBindException(BindException e)  {
         return new ResponseEntity<>(e.getAllErrors(), HttpStatus.BAD_REQUEST);
     }
 }

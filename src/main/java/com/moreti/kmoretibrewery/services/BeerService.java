@@ -1,12 +1,11 @@
-package com.moreti.kmoretibrewery.service;
+package com.moreti.kmoretibrewery.services;
 
 import com.moreti.kmoretibrewery.web.model.BeerDto;
-import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 public interface BeerService {
-    BeerDto getById(UUID beerId);
+    BeerDto getBeerById(UUID beerId);
 
     BeerDto saveNewBeer(BeerDto beerDto);
 
